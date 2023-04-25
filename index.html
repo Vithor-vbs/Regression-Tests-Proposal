@@ -1,0 +1,582 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style type="text/css">
+      body,
+      html {
+        overflow-x: hidden;
+      }
+      .passed-header,
+      .ts-block-header p {
+        text-transform: uppercase;
+        font-size: 1rem;
+      }
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      html {
+        font-size: 62.5%;
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: Rubik, sans-serif;
+        line-height: 1;
+        font-weight: 400;
+        color: #555;
+      }
+      .smy-main-container {
+        margin: 5rem 0;
+        display: flex;
+        justify-content: center;
+      }
+      .smy-vertical-container{
+        max-width: 750px;
+        margin: 0 auto;      }
+
+      .smy-ART-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 3rem;
+      }
+      .smy-header-box h1 {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+      }
+      .smy-header-box p,
+      .smy-logo-name {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 3rem;
+      }
+      .smy-logo-box {
+        text-align: right;
+      }
+      .smy-logo {
+        border: 5px solid #01a982;
+        height: 25px;
+        margin-bottom: 1.7rem;
+        width: 70px;
+      }
+      .smy-overview-header h2,
+      .smy-run-header h2,
+      .smy-ts-header h2 {
+        text-transform: uppercase;
+        padding-bottom: 0.5rem;
+        display: inline-block;
+        border-bottom: 5px solid #01a982;
+        margin-bottom: 2rem;
+        font-size: 1.2rem;
+      }
+      .smy-overview-info {
+        border-radius: 13px;
+        background-color: #0e5265;
+        color: #fff;
+        font-weight: bolder;
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 2rem;
+        height: 11rem;
+      }
+      .check-icons,
+      .passed-text,
+      .smy-run-box {
+        background-color: #00c781;
+      }
+      .check-icons,
+      .smy-overview-build p:not(:nth-child(2)) {
+        margin-bottom: 1rem;
+      }
+      .passed-header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1.5rem;
+      }
+      .smy-overview-passed {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .check-icons {
+        display: inline-block;
+        font-size: 2rem;
+        color: #fff;
+        width: 2.2rem;
+        height: 2.2rem;
+        padding: 0.3rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .clock-adjust {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .passed-text {
+        display: inline-block;
+        padding: 0.6rem;
+        border-radius: 30px;
+      }
+      .smy-overview-build,
+      .smy-overview-pass-goal {
+        font-size: 1rem;
+        font-weight: lighter;
+        letter-spacing: 0.5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .smy-overview-build p:last-child {
+        margin-bottom: 2rem;
+      }
+      .smy-overview-build p:first-child {
+        margin-top: 2rem;
+      }
+      .build-percentage,
+      .run-box-content-aux p:first-child,
+      .smy-overview-pass-goal p:first-child {
+        font-size: 2rem;
+        font-weight: 700;
+      }
+      .smy-overview-pass-goal {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .smy-run-container {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .smy-run-flex-aux {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      @media screen and (max-width: 630px) {
+        .smy-run-box {
+          margin-bottom: 1rem !important;
+          width: 100% !important;
+      
+        }
+        .robot-box {
+          margin-bottom: 1rem !important;
+        }
+        .smy-logo-name {
+          display: none;
+        }
+        .img-arrow-icon{
+          display: none;
+        }
+      }
+
+      .smy-run-box {
+        min-width: 300px;
+        border-radius: 13px;
+        color: #fff;
+        font-size: 1rem;
+        margin: 0.5rem;
+        flex-grow: 1;
+      }
+
+      .smy-run-box-aux{
+        width: 350px ;
+      }
+
+      .run-box-headers {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 1.5rem 2rem;
+        font-weight: 700;
+      }
+      .run-golang-adjust {
+        margin: 1rem 2rem;
+      }
+      .logo-img {
+        height: 45px;
+        width: 45px;
+      }
+      .logo-img-robot {
+        height: 19px;
+        width: 19px;
+      }
+      .img-check-icon {
+        height: 25px;
+        width: 25px;
+      }
+      .img-check-icon-aux {
+        height: 30px;
+        width: 30px;
+      }
+      .img-clock-icon {
+        height: 13px;
+        width: 13px;
+        margin-right: 0.4rem;
+      }
+      .run-box-content {
+        display: flex;
+        justify-content: space-between;
+        margin-left: 1.5rem;
+
+
+      }
+      .golang-run-aux {
+        margin-right: 8rem;
+        margin-left: 1.6rem;
+        justify-content: left;
+      }
+
+    .golang-run-aux div:first-child{
+          margin-right: 25%;
+    }
+      .robot-run-aux {
+        margin-right: 1rem;
+        margin-left: 2rem;
+      }
+      .robot-run-box {
+        display: flex;
+        gap: 1rem;
+        border-left: 1px solid #fff;
+        padding-left: 2.5rem;
+      }
+      .run-box-content-aux {
+        padding-right: 1.5rem;
+        text-align: left;
+      }
+      .run-box-date {
+        display: flex;
+        justify-content: end;
+        padding: 1.5rem;
+        margin-right: 1rem;
+      }
+      .robot-box {
+        background-color: #3c4352;
+      }
+      .arrow-icon {
+        margin: 0 1rem;
+      }
+      .img-arrow-icon {
+        height: 20px;
+        width: 20px;
+      }
+      .smy-run-obs {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 3rem;
+        margin-top: 2.5rem;
+      }
+      .obs-description {
+        font-size: 1rem;
+        width: 50rem;
+        word-wrap: break-word;
+        line-height: 1.8rem;
+      }
+      .ts-block {
+        background-color: #f7f7f7;
+        border-radius: 13px;
+      }
+      .ts-block-header {
+        display: flex;
+        align-items: center;
+        padding: 2.5rem;
+      }
+      .ts-block-header p {
+        font-weight: 700;
+        color: #00c781;
+      }
+      .check-aux {
+        padding: 0.3rem;
+        background-color: #00c781;
+        color: #fff;
+        width: 2.4rem;
+        height: 2.4rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 0.6rem;
+      }
+    </style>
+    <title>Passed Design Proposal</title>
+  </head>
+  <body>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <section class="smy-main-container">
+      <div class="smy-vertical-container">
+        <div class="smy-ART-header">
+          <div class="smy-header-box">
+            <h1>Automated Regressions Tests</h1>
+            <p id="currentDate"></p>
+          </div>
+          <div class="smy-logo-box">
+            <p class="smy-logo"></p>
+            <p class="smy-logo-name">Project Aurora</p>
+          </div>
+        </div>
+        <div class="smy-overview-box">
+          <div class="smy-overview-header">
+            <h2>Overview</h2>
+          </div>
+        </div>
+        <div class="smy-overview-info">
+          <div class="smy-overview-passed">
+            <span class="passed-header">
+              <div class="check-icons">
+                <img
+                  class="img-check-icon"
+                  src="https://i.ibb.co/cyFwR7h/check-white.png"
+                  alt="check-icon"
+                />
+              </div>
+              <p class="passed-text">passed</p></span
+            >
+          </div>
+          <div class="smy-overview-build">
+            <p>Build 2258</p>
+            <p class="build-percentage">100%</p>
+            <p>pass rate</p>
+            <p class="clock-adjust">
+              <img
+                class="img-clock-icon"
+                src="https://i.ibb.co/pfbfK0D/clock-white.png"
+                alt="clock-icon"
+              /><span>7h 12m 17s</span>
+            </p>
+          </div>
+          <div class="smy-overview-pass-goal">
+            <p>95%</p>
+            <p>pass goal</p>
+          </div>
+        </div>
+        <div>
+          <div class="smy-run-header">
+            <h2>Runs</h2>
+          </div>
+        </div>
+        <table class="smy-run-container">
+          <tr class="smy-run-flex-aux smy-run-flex-margin">
+            <th class="smy-run-box smy-run-box-aux">
+              <div class="run-box-headers run-golang-adjust">
+                <p>VM</p>
+                <img
+                  class="logo-img"
+                  src="https://go.dev/blog/go-brand/Go-Logo/SVG/Go-Logo_White.svg"
+                />
+              </div>
+              <div class="run-box-content golang-run-aux">
+                <div class="run-box-content-aux">
+                  <p>250</p>
+                  <p>passed</p>
+                </div>
+                <div class="run-box-content-aux">
+                  <p>0</p>
+                  <p>failed</p>
+                </div>
+              </div>
+              <div class="run-box-date">
+                <p class="clock-adjust">
+                  <img
+                    class="img-clock-icon"
+                    src="https://i.ibb.co/pfbfK0D/clock-white.png"
+                    alt="clock-icon"
+                  /><span>7h 12m 17s</span>
+                </p>
+              </div>
+            </div>
+            <th class="smy-run-box smy-run-box-aux">
+              <div class="run-box-headers run-golang-adjust">
+                <p>VM</p>
+                <img
+                  class="logo-img"
+                  src="https://go.dev/blog/go-brand/Go-Logo/SVG/Go-Logo_White.svg"
+                />
+              </div>
+              <div class="run-box-content golang-run-aux">
+                <div class="run-box-content-aux">
+                  <p>250</p>
+                  <p>passed</p>
+                </div>
+                <div class="run-box-content-aux">
+                  <p>0</p>
+                  <p>failed</p>
+                </div>
+              </div>
+              <div class="run-box-date">
+                <p class="clock-adjust">
+                  <img
+                    class="img-clock-icon"
+                    src="https://i.ibb.co/pfbfK0D/clock-white.png"
+                    alt="clock-icon"
+                  /><span>7h 12m 17s</span>
+                </p>
+              </div>
+            </th>
+          </tr>
+          <tr class="smy-run-flex-aux">
+            <th class="smy-run-box robot-box">
+              <div class="run-box-headers">
+                <p>Quake</p>
+                <img
+                  class="logo-img-robot"
+                  src="https://i.ibb.co/d2f0qX9/robot-framework-white.png"
+                  alt="robot-framework-white logo"
+                />
+              </div>
+              <div class="run-box-content robot-run-aux">
+                <div class="run-box-content-aux">
+                  <p>96.3%</p>
+                  <p>pass rate</p>
+                </div>
+                <div class="robot-run-box">
+                  <div class="run-box-content-aux">
+                    <p>233</p>
+                    <p>passed</p>
+                  </div>
+                  <div class="run-box-content-aux">
+                    <p>3</p>
+                    <p>failed</p>
+                  </div>
+                </div>
+              </div>
+              <div class="run-box-date">
+                <p class="clock-adjust">
+                  <img
+                    class="img-clock-icon"
+                    src="https://i.ibb.co/pfbfK0D/clock-white.png"
+                    alt="clock-icon"
+                  /><span>7h 12m 17s</span>
+                </p>
+              </div>
+            </th>
+            <th class="smy-run-box robot-box">
+              <div class="run-box-headers">
+                <p>Quake</p>
+                <img
+                  class="logo-img-robot"
+                  src="https://i.ibb.co/d2f0qX9/robot-framework-white.png"
+                  alt="robot-framework-white logo"
+                />
+              </div>
+              <div class="run-box-content robot-run-aux">
+                <div class="run-box-content-aux">
+                  <p>96.3%</p>
+                  <p>pass rate</p>
+                </div>
+                <div class="robot-run-box">
+                  <div class="run-box-content-aux">
+                    <p>233</p>
+                    <p>passed</p>
+                  </div>
+                  <div class="run-box-content-aux">
+                    <p>3</p>
+                    <p>failed</p>
+                  </div>
+                </div>
+              </div>
+              <div class="run-box-date">
+                <p class="clock-adjust">
+                  <img
+                    class="img-clock-icon"
+                    src="https://i.ibb.co/pfbfK0D/clock-white.png"
+                    alt="clock-icon"
+                  /><span>7h 12m 17s</span>
+                </p>
+              </div>
+            </th>
+          </tr>
+        </table>
+        <div class="smy-run-obs">
+          <div class="arrow-icon">
+            <img
+              class="img-arrow-icon"
+              src="https://i.ibb.co/zfp91HP/arrow-return-right-white.png"
+              alt="arrow-icon"
+            />
+          </div>
+          <p class="obs-description">
+            We are not considering the robot tests to the pass rate result due
+            to the robot tests are not yet having impact on Jenkins
+          </p>
+        </div>
+
+        <div class="smy-trivyscan-status">
+          <div>
+            <div class="smy-ts-header">
+              <h2>Trivy scan</h2>
+            </div>
+          </div>
+          <div class="ts-block">
+            <span class="ts-block-header"
+              ><div class="check-aux">
+                <img
+                  class="img-check-icon-aux"
+                  src="https://i.ibb.co/cyFwR7h/check-white.png"
+                  alt="check-white"
+                  alt=""
+                />
+              </div>
+              <p>passed</p></span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      // date configuration
+      let today = new Date();
+      let daysOfWeek = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      let monthsOfYear = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+
+      let dayOfWeek = daysOfWeek[today.getDay()];
+      let month = monthsOfYear[today.getMonth()];
+      let dayOfMonth = today.getDate();
+      let year = today.getFullYear();
+
+      let formattedDate =
+        dayOfWeek + " - " + month + ", " + dayOfMonth + " of " + year;
+
+      document.getElementById("currentDate").textContent = formattedDate;
+    </script>
+  </body>
+</html>
